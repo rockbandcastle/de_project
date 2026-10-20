@@ -1,0 +1,80 @@
+# ===== Данные =====
+data/
+!data/.gitkeep
+*.csv
+*.parquet
+*.avro
+*.jsonl
+!dbt/seeds/*.csv
+
+# ===== Секреты и окружение =====
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# ===== Python =====
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.ipynb_checkpoints/
+
+# ===== dbt =====
+dbt/target/
+dbt/dbt_packages/
+dbt/logs/
+dbt/.user.yml
+
+# ===== Airflow =====
+airflow/logs/
+airflow/dags/__pycache__/
+airflow/airflow.cfg
+airflow/webserver_config.py
+
+# ===== Spark =====
+spark-warehouse/
+metastore_db/
+derby.log
+spark-events/
+
+# ===== MLflow =====
+mlruns/
+mlartifacts/
+mlflow.db
+
+# ===== Docker / volume'ы =====
+docker/volumes/
+*.pid
+
+# ===== Логи =====
+*.log
+logs/
+
+# ===== IDE / OS =====
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===== Прочее =====
+*.tmp
+*.bak
+.cache/
