@@ -90,11 +90,37 @@ services:
       retries: 5
       start_period: 10s
 
+  # ============ Prometheus (метрики) ============
+  prometheus:
+    image: prom/prometheus:v2.53.0
+    container_name: mfc_prometheus
+    restart: unless-stopped
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.path=/prometheus"
+      - "--storage.tsdb.retention.time=15d"
+      - "--web.enable-lifecycle"
+    ports:
+      - "${PROMETHEUS_PORT}:9090"
+    volumes:
+      - ./docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prom_data:/prometheus
+    networks:
+      - mfc_net
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:9090/-/healthy"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+
 volumes:
   pg_data:
   ch_data:
   minio_data:
   mongo_data:
+  prom_data:
 
 networks:
   mfc_net:
